@@ -10,6 +10,6 @@ resource "digitalocean_droplet" "docker_host" {
     size = "s-1vcpu-1gb"
     vpc_uuid = var.vpc_uuid
     ssh_keys = [
-      digitalocean_ssh_key.keyfile
+      digitalocean_ssh_key.keyfile.fingerprint
     ]
 }

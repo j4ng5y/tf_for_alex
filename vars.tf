@@ -18,3 +18,7 @@ variable "db_name" {
 variable "ssh_key_file" {
   type = string
 }
+
+variable "domain_name" {
+  type = string
+}

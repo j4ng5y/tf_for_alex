@@ -1,12 +1,12 @@
 resource "digitalocean_domain" "domain" {
-    name = "do.j4ng5y.dev"
+    name = var.domain_name
 }
 
 resource "digitalocean_certificate" "lecert" {
     name = "le-terraform-cert"
     type = "lets_encrypt"
     domains = [
-        "do.j4ng5y.dev"
+        var.domain_name
     ]
 }
 

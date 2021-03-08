@@ -1,20 +1,33 @@
+resource "digitalocean_domain" "domain" {
+    name = "do.j4ng5y.dev"
+}
+
 resource "digitalocean_certificate" "lecert" {
     name = "le-terraform-cert"
     type = "lets_encrypt"
     domains = [
-        
+        "do.j4ng5y.dev"
     ]
 }
 
 resource "digitalocean_loadbalancer" "public" {
     name = "lb"
     region = "nyc1"
+    redirect_http_to_https = true
 
     forwarding_rule {
         entry_port = 80
-        entry_protocol = "tcp"
+        entry_protocol = "http"
         target_port = 8080
-        target_protocol = "tcp"
+        target_protocol = "http"
+    }
+
+    forwarding_rule {
+        entry_port = 443
+        entry_protocol = "https"
+        target_port = 8080
+        target_protocol = "http"
+        certificate_name = digitalocean_certificate.lecert.name
     }
 
     healthcheck {

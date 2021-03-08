@@ -18,4 +18,5 @@ module "compute" {
 module "lb" {
   source         = "./mods/digitalocean/lb"
   docker_host_id = module.compute.docker_host_id
+  domain_name    = var.domain_name
 }

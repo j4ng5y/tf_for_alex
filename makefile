@@ -19,3 +19,11 @@ plan-prod:
 deploy-prod: prod.plan
 	terraform apply -auto-approve prod.plan
 	rm -f prod.plan
+
+.PHONY: destroy-test
+destroy-test:
+	terraform destroy -var-file="envs/test.tfvars" -auto-approve
+
+.PHONY: destroy-prod
+destroy-prod:
+	terraform destroy -var-file="envs/prod.tfvars" -auto-approve

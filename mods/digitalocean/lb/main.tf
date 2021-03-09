@@ -8,6 +8,8 @@ resource "digitalocean_certificate" "lecert" {
     domains = [
         var.domain_name
     ]
+
+    depends_on = [ digitalocean_domain.domain ]
 }
 
 resource "digitalocean_loadbalancer" "public" {
